@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🐝 Aniversário da Marina — Confirmação de Presença</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --amarelo:     #FFD000;
+    --amarelo-mel: #FFA500;
+    --marrom:      #5C3A1E;
+    --preto:       #1A1A1A;
+    --branco:      #FFFDF0;
+    --creme:       #FFF8DC;
+    --verde:       #4CAF50;
+    --sombra:      rgba(92,58,30,0.18);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background-color: var(--creme);
+    background-image:
+      radial-gradient(circle at 15% 20%, #FFE06655 0%, transparent 40%),
+      radial-gradient(circle at 85% 80%, #FFA50033 0%, transparent 40%);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px 16px 60px;
+  }
+
+  /* ── Favo de mel de fundo ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='100'%3E%3Cpath d='M28 66L0 50V18L28 2l28 16v32L28 66zM28 98L0 82V50l28-16 28 16v32L28 98z' fill='none' stroke='%23FFD00022' stroke-width='1'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .card {
+    position: relative;
+    z-index: 1;
+    background: white;
+    border-radius: 32px;
+    max-width: 560px;
+    width: 100%;
+    box-shadow: 0 12px 48px var(--sombra), 0 2px 8px rgba(0,0,0,0.06);
+    overflow: hidden;
+    animation: subir 0.7s cubic-bezier(.22,1,.36,1) both;
+  }
+
+  @keyframes subir {
+    from { opacity:0; transform: translateY(40px); }
+    to   { opacity:1; transform: translateY(0); }
+  }
+
+  /* ── Topo ── */
+  .topo {
+    background: linear-gradient(135deg, var(--amarelo) 0%, var(--amarelo-mel) 100%);
+    padding: 40px 32px 32px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .topo::after {
+    content: '';
+    position: absolute;
+    bottom: -2px; left: 0; right: 0;
+    height: 28px;
+    background: white;
+    border-radius: 50% 50% 0 0 / 28px 28px 0 0;
+  }
+
+  .abelha-grande {
+    font-size: 72px;
+    display: block;
+    margin-bottom: 4px;
+    animation: flutuar 3s ease-in-out infinite;
+    filter: drop-shadow(0 8px 16px rgba(0,0,0,0.15));
+  }
+
+  @keyframes flutuar {
+    0%,100% { transform: translateY(0) rotate(-3deg); }
+    50%      { transform: translateY(-10px) rotate(3deg); }
+  }
+
+  .abelhinhas-deco {
+    position: absolute;
+    font-size: 22px;
+    opacity: 0.55;
+    animation: flutuar 4s ease-in-out infinite;
+  }
+  .ab1 { top: 14px; left: 20px; animation-delay: .5s; }
+  .ab2 { top: 30px; right: 24px; animation-delay: 1.2s; font-size:16px; }
+  .ab3 { bottom: 40px; left: 40px; animation-delay: .8s; font-size:14px; }
+
+  .topo h1 {
+    font-family: 'Fredoka One', cursive;
+    font-size: 2.2rem;
+    color: var(--marrom);
+    line-height: 1.15;
+    letter-spacing: 0.5px;
+    text-shadow: 0 2px 0 rgba(255,255,255,0.4);
+  }
+
+  .topo h1 span {
+    color: white;
+    text-shadow: 0 2px 8px rgba(92,58,30,0.3);
+  }
+
+  .subtitulo {
+    margin-top: 10px;
+    font-size: 1rem;
+    color: var(--marrom);
+    font-weight: 700;
+    opacity: 0.85;
+  }
+
+  /* ── Info da festa ── */
+  .info-festa {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    background: var(--creme);
+    margin: 28px 28px 0;
+    border-radius: 16px;
+    padding: 18px 22px;
+    border: 2px dashed var(--amarelo-mel);
+  }
+
+  .info-festa .linha {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.95rem;
+    color: var(--marrom);
+    font-weight: 700;
+  }
+
+  .info-festa .linha .icon { font-size: 1.2rem; }
+
+  /* ── Formulário ── */
+  form {
+    padding: 28px 28px 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .campo label {
+    display: block;
+    font-size: 0.88rem;
+    font-weight: 800;
+    color: var(--marrom);
+    margin-bottom: 7px;
+    letter-spacing: 0.3px;
+  }
+
+  .campo label .emoji { margin-right: 5px; }
+
+  .campo input,
+  .campo textarea,
+  .campo select {
+    width: 100%;
+    border: 2.5px solid #E8D8B0;
+    border-radius: 14px;
+    padding: 13px 16px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 1rem;
+    color: var(--preto);
+    background: var(--branco);
+    transition: border-color 0.2s, box-shadow 0.2s;
+    outline: none;
+    -webkit-appearance: none;
+  }
+
+  .campo input:focus,
+  .campo textarea:focus,
+  .campo select:focus {
+    border-color: var(--amarelo-mel);
+    box-shadow: 0 0 0 4px rgba(255,165,0,0.15);
+    background: white;
+  }
+
+  .campo textarea {
+    resize: vertical;
+    min-height: 100px;
+    line-height: 1.5;
+  }
+
+  .campo .hint {
+    font-size: 0.78rem;
+    color: #999;
+    margin-top: 5px;
+    font-weight: 600;
+  }
+
+  /* número com spinner bonito */
+  input[type=number]::-webkit-inner-spin-button { opacity: 1; }
+
+  /* ── Botão ── */
+  .btn-confirmar {
+    background: linear-gradient(135deg, var(--amarelo) 0%, var(--amarelo-mel) 100%);
+    color: var(--marrom);
+    border: none;
+    border-radius: 999px;
+    padding: 17px 32px;
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.25rem;
+    cursor: pointer;
+    letter-spacing: 0.5px;
+    box-shadow: 0 6px 20px rgba(255,165,0,0.4);
+    transition: transform 0.15s, box-shadow 0.15s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-confirmar:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 28px rgba(255,165,0,0.5);
+  }
+
+  .btn-confirmar:active { transform: scale(0.97); }
+
+  .btn-confirmar::after {
+    content: ' 🐝';
+    font-size: 1.1rem;
+  }
+
+  /* ── Sucesso ── */
+  .sucesso {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 48px 32px 52px;
+    gap: 16px;
+    animation: subir 0.5s ease both;
+  }
+
+  .sucesso .big { font-size: 80px; animation: flutuar 2s ease-in-out infinite; }
+  .sucesso h2 {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.8rem;
+    color: var(--marrom);
+  }
+  .sucesso p {
+    font-size: 1rem;
+    color: #666;
+    line-height: 1.6;
+    max-width: 340px;
+    font-weight: 600;
+  }
+
+  /* ── Rodapé ── */
+  .rodape {
+    margin-top: 28px;
+    font-size: 0.78rem;
+    color: #AAA;
+    font-weight: 600;
+    text-align: center;
+    z-index: 1;
+  }
+
+  /* ── Divisor ── */
+  .divisor {
+    border: none;
+    border-top: 2px dashed #F0DFA0;
+    margin: 4px 0;
+  }
+
+  @media (max-width: 420px) {
+    .topo h1 { font-size: 1.75rem; }
+    .abelha-grande { font-size: 60px; }
+    form { padding: 24px 20px 28px; }
+    .info-festa { margin: 22px 20px 0; }
+  }
+</style>
+</head>
+<body>
+
+<div class="card">
+
+  <!-- TOPO -->
+  <div class="topo">
+    <span class="abelhinhas-deco ab1">🐝</span>
+    <span class="abelhinhas-deco ab2">🍯</span>
+    <span class="abelhinhas-deco ab3">🌼</span>
+    <span class="abelha-grande">🐝</span>
+    <h1>Aniversário da<br><span>Marina!</span></h1>
+    <p class="subtitulo">Ela vai fazer 2 aninhos 🎂</p>
+  </div>
+
+  <!-- INFO DA FESTA -->
+  <div class="info-festa">
+    <div class="linha"><span class="icon">📅</span> 26 de julho de 2026 (domingo)</div>
+    <div class="linha"><span class="icon">📍</span> Espaço Villa Uno — Vicente Pires</div>
+    <div class="linha"><span class="icon">🐝</span> Tema: Abelhinhas</div>
+  </div>
+
+  <!-- FORMULÁRIO -->
+  <form id="form-rsvp" action="https://formspree.io/f/xzdyyryz" method="POST">
+
+    <div class="campo">
+      <label><span class="emoji">👤</span>Seu nome completo</label>
+      <input type="text" name="nome" placeholder="Como você se chama?" required>
+    </div>
+
+    <hr class="divisor">
+
+    <div class="campo">
+      <label><span class="emoji">👥</span>Quantas pessoas vêm no total?</label>
+      <input type="number" name="total_convidados" min="1" max="20" placeholder="Incluindo você" required>
+      <p class="hint">Conte todos: adultos e crianças juntos</p>
+    </div>
+
+    <div class="campo">
+      <label><span class="emoji">🧒</span>Quantas crianças até 7 anos?</label>
+      <input type="number" name="criancas_ate_7" min="0" max="20" placeholder="Pode ser 0" required>
+      <p class="hint">Precisamos saber para organizar as atividades das crianças</p>
+    </div>
+
+    <hr class="divisor">
+
+    <div class="campo">
+      <label><span class="emoji">💛</span>Mensagem de carinho para a Marina</label>
+      <textarea name="mensagem" placeholder="Escreva um recadinho fofo para a aniversariante! 🍯"></textarea>
+    </div>
+
+    <!-- Campo oculto para identificar o formulário -->
+    <input type="hidden" name="_subject" value="🐝 Nova confirmação — Aniversário da Marina!">
+    <input type="hidden" name="_language" value="pt">
+
+    <button type="submit" class="btn-confirmar">Confirmar Presença</button>
+  </form>
+
+  <!-- MENSAGEM DE SUCESSO (aparece após envio) -->
+  <div class="sucesso" id="sucesso">
+    <div class="big">🍯</div>
+    <h2>Que alegria! 🐝</h2>
+    <p>Sua presença foi confirmada!<br>A Marina vai ficar feliz demais em te ver na festinha dela. Até lá! 🌼</p>
+  </div>
+
+</div>
+
+<p class="rodape">Confirmação de presença · Aniversário Marina 2026 🐝</p>
+
+<script>
+  const form = document.getElementById('form-rsvp');
+  const sucesso = document.getElementById('sucesso');
+
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const btn = form.querySelector('.btn-confirmar');
+    btn.textContent = 'Enviando...';
+    btn.disabled = true;
+    btn.style.opacity = '0.7';
+
+    try {
+      const data = new FormData(form);
+      const response = await fetch(form.action, {
+        method: 'POST',
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (response.ok) {
+        form.style.display = 'none';
+        sucesso.style.display = 'flex';
+      } else {
+        btn.textContent = 'Confirmar Presença';
+        btn.disabled = false;
+        btn.style.opacity = '1';
+        alert('Ops! Algo deu errado. Tente novamente.');
+      }
+    } catch(err) {
+      btn.textContent = 'Confirmar Presença';
+      btn.disabled = false;
+      btn.style.opacity = '1';
+      alert('Erro de conexão. Verifique sua internet e tente novamente.');
+    }
+  });
+</script>
+
+</body>
+</html>
